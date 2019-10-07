@@ -20,6 +20,8 @@ def trigger_success_phone_call(url):
 
 def check_for_position(job_posts=[], url=posting_url):
     found = False
+    num_jobs = len(job_posts)
+    print(f'Scraping {int(num_jobs / 3)} nursing jobs')
     for job_post in job_posts:
         if job_posting.lower() in job_post.text.lower():
             print(f'{job_posting} job was found!')
@@ -35,9 +37,11 @@ def run_scrape():
     print('Scraping Childrens Minnesota job listings page.')
     print('====================================================')
 
+    chrome_bin = os.environ.get('GOOGLE_CHROME_SHIM', None)
     chrome_options = Options()
+    chrome_options.binary_location = chrome_bin
     chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(executable_path="chromedriver", options=chrome_options)
     driver.implicitly_wait(3000)
     driver.get(posting_url)
 
