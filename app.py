@@ -11,7 +11,7 @@ import requests
 # Constants
 job_posting = 'New Grad'
 event_name = 'phone_call'
-sms_trigger_url = f'https://maker.ifttt.com/trigger/{event_name}/with/key/biRPCs-8xjD_sq_NAlcN0dynwzvl1ALKIGB7kxX4F2A'
+sms_trigger_url = 'https://maker.ifttt.com/trigger/phone_call/with/key/biRPCs-8xjD_sq_NAlcN0dynwzvl1ALKIGB7kxX4F2A'
 posting_url = "https://childrensmn.taleo.net/careersection/chc_nursing/jobsearch.ftl?lang=en&radiusType=M&searchExpanded=true&radius=1&jobfield=200126570"
 
 def trigger_success_phone_call(url):
@@ -21,17 +21,16 @@ def trigger_success_phone_call(url):
 def check_for_position(job_posts=[], url=posting_url):
     found = False
     num_jobs = len(job_posts)
-    print(f'Scraping {int(num_jobs / 3)} nursing jobs')
+    print('Scraping ' + str(int(num_jobs / 3)) + ' nursing jobs')
     for job_post in job_posts:
         if job_posting.lower() in job_post.text.lower():
-            print(f'{job_posting} job was found!')
             found = True
 
     if found:
-        print(f'{job_posting} job was found!')
+        print(job_posting + ' job was found!')
         trigger_success_phone_call(url)
     else:
-        print(f"{job_posting} job hasn't been posted yet.")
+        print(job_posting + " job hasn't been posted yet.")
 
 def run_scrape():
     print('Scraping Childrens Minnesota job listings page.')
