@@ -21,7 +21,7 @@ def trigger_success_phone_call(url):
 def check_for_position(job_posts=[], url=posting_url):
     found = False
     num_jobs = len(job_posts)
-    print('Scraping ' + str(int(num_jobs / 3)) + ' nursing jobs')
+
     for job_post in job_posts:
         if job_posting.lower() in job_post.text.lower():
             found = True
@@ -30,7 +30,7 @@ def check_for_position(job_posts=[], url=posting_url):
         print(job_posting + ' job was found!')
         trigger_success_phone_call(url)
     else:
-        print(job_posting + " job hasn't been posted yet.")
+        return int(num_jobs / 3)
 
 def run_scrape():
     print('Scraping Childrens Minnesota job listings page.')
@@ -48,6 +48,8 @@ def run_scrape():
     driver.implicitly_wait(3000)
     driver.get(posting_url)
 
+    num_jobs = 0
+
     # Wait for job postings to lazy load
     time.sleep(2)
 
@@ -59,10 +61,17 @@ def run_scrape():
 
     # Wait for job postings to lazy load
     time.sleep(2)
+    jobs_scraped = check_for_position(job_posts=job_posts, url=driver.current_url)
+    num_jobs += jobs_scraped
 
     second_page = BeautifulSoup(driver.page_source, features="html.parser")
-    check_for_position(job_posts=job_posts, url=driver.current_url)
+    job_posts = second_page.find_all('div', {"class": "absolute"})
 
-    print('Finished scraping.')
+    jobs_scraped = check_for_position(job_posts=job_posts, url=driver.current_url)
+    num_jobs += jobs_scraped
+
+    print('Scraping ' + str(num_jobs) + ' nursing jobs')
+
+    print('Job not found :(')
 
 run_scrape()
