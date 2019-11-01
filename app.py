@@ -29,6 +29,8 @@ def check_for_position(job_posts=[], url=posting_url):
     if found:
         print(job_posting + ' job was found!')
         trigger_success_phone_call(url)
+        return int(num_jobs / 3)
+
     else:
         return int(num_jobs / 3)
 
