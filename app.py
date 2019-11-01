@@ -10,8 +10,8 @@ import requests
 
 # Constants
 job_posting = 'New Grad'
-event_name = 'phone_call'
-sms_trigger_url = 'https://maker.ifttt.com/trigger/phone_call/with/key/biRPCs-8xjD_sq_NAlcN0dynwzvl1ALKIGB7kxX4F2A'
+event_name = 'new_grad'
+sms_trigger_url = 'https://maker.ifttt.com/trigger/new_grad/with/key/biRPCs-8xjD_sq_NAlcN0dynwzvl1ALKIGB7kxX4F2A'
 posting_url = "https://childrensmn.taleo.net/careersection/chc_nursing/jobsearch.ftl?lang=en&radiusType=M&searchExpanded=true&radius=1&jobfield=200126570"
 
 def trigger_success_phone_call(url):
