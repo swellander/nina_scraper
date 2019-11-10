@@ -1,3 +1,3 @@
 ## Nina Scraper
 
-A little script to check the Childrens Minnesota job listings for a particular nursing post.
+A script to check the Childrens Minnesota job listings for a particular nursing post.
